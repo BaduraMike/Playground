@@ -21,12 +21,17 @@ class App extends Component {
                 completed: false
             },
         ]
-    }
+    };
+
+    markComplete = (id) => {
+        console.log(id)
+    };
+
     render() {
         return (
             <div className="App">
                 <h1>ToDoApp</h1>
-                <Todos todos={this.state.todos} />
+                <Todos todos={this.state.todos} markComplete={this.markComplete}/>
             </div>
         );
     }
