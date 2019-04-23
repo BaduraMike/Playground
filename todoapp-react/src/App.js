@@ -6,8 +6,12 @@ import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
 // import uuid from 'uuid';
 import axios from 'axios';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
 
 import './App.css';
+
+const store = createStore(() => [], {}, applyMiddleware());
 
 class App extends Component {
     state = {
@@ -54,22 +58,24 @@ class App extends Component {
 
     render() {
         return (
-            <Router>
-                <div className="App">
-                    <div className="container">
-                        <Header/>
-                        <Route exact path="/" render={props => (
-                            <React.Fragment>
-                                <AddTodo addTodo={this.addTodo}/>
-                                <Todos todos={this.state.todos}
-                                       markComplete={this.markComplete}
-                                       delTodo={this.delTodo}/>
-                            </React.Fragment>
-                        )}/>
-                        <Route path="/about" component={About}/>
+            <Provider store={store}>
+                <Router>
+                    <div className="App">
+                        <div className="container">
+                            <Header/>
+                            <Route exact path="/" render={props => (
+                                <React.Fragment>
+                                    <AddTodo addTodo={this.addTodo}/>
+                                    <Todos todos={this.state.todos}
+                                           markComplete={this.markComplete}
+                                           delTodo={this.delTodo}/>
+                                </React.Fragment>
+                            )}/>
+                            <Route path="/about" component={About}/>
+                        </div>
                     </div>
-                </div>
-            </Router>
+                </Router>
+            </Provider>
         );
     }
 }
