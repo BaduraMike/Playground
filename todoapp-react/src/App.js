@@ -7,11 +7,9 @@ import About from './components/pages/About';
 // import uuid from 'uuid';
 import axios from 'axios';
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
+import store from './store';
 
 import './App.css';
-
-const store = createStore(() => [], {}, applyMiddleware());
 
 class App extends Component {
     state = {
