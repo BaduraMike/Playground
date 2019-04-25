@@ -12,14 +12,6 @@ import store from './store';
 import './App.css';
 
 class App extends Component {
-    state = {
-        todos: []
-    };
-
-    componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-            .then(res => this.setState({todos: res.data}))
-    }
 
     //Toggle Complete
     markComplete = (id) => {
@@ -53,8 +45,8 @@ class App extends Component {
                 [...this.state.todos, res.data]
         }));
     };
-
     render() {
+
         return (
             <Provider store={store}>
                 <Router>
@@ -64,9 +56,10 @@ class App extends Component {
                             <Route exact path="/" render={props => (
                                 <React.Fragment>
                                     <AddTodo addTodo={this.addTodo}/>
-                                    <Todos todos={this.state.todos}
-                                           markComplete={this.markComplete}
-                                           delTodo={this.delTodo}/>
+                                    {/*<Todos todos={this.state.todos}*/}
+                                    {/*       markComplete={this.markComplete}*/}
+                                    {/*       delTodo={this.delTodo}/>*/}
+                                    <Todos />
                                 </React.Fragment>
                             )}/>
                             <Route path="/about" component={About}/>
