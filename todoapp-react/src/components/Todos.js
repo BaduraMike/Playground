@@ -10,6 +10,12 @@ class Todos extends Component {
         this.props.getTodos();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.newTodo) {
+            this.props.todos.unshift(nextProps.newTodo);
+        }
+    }
+
     render() {
         return this.props.todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete}
@@ -20,13 +26,16 @@ class Todos extends Component {
 
 //PropTypes
 Todos.propTypes = {
+    getTodos: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
+    newTodo: PropTypes.object.isRequired,
     // markComplete: PropTypes.func.isRequired,
     // delTodo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-    todos: state.todos.items
+    todos: state.todos.items,
+    newTodo: state.todos.item
 });
 
 export default connect(mapStateToProps, {getTodos})(Todos);

@@ -1,14 +1,29 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {postTodo} from "../actions/todoActions";
 
-export class AddTodo extends Component {
-    state = {
-        title: ''
+class AddTodo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: '',
+            completed: false,
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     };
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addTodo(this.state.title);
+
+        const todo = {
+            title: this.state.title,
+            completed: this.state.completed,
+        };
+
+        this.props.postTodo(todo);
         this.setState({title: ''});
     };
 
@@ -38,7 +53,7 @@ export class AddTodo extends Component {
 
 //PropTypes
 AddTodo.propTypes = {
-    addTodo: PropTypes.func.isRequired
+    postTodo: PropTypes.func.isRequired,
 };
 
-export default AddTodo
+export default connect(null, {postTodo})(AddTodo);

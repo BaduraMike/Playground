@@ -34,17 +34,6 @@ class App extends Component {
             }));
     };
 
-    //Add Todo
-    addTodo = (title) => {
-        axios.post('https://jsonplaceholder.typicode.com/todos',
-            {
-                title: title,
-                completed: false
-            }).then(res => this.setState({
-            todos:
-                [...this.state.todos, res.data]
-        }));
-    };
     render() {
 
         return (
@@ -55,7 +44,7 @@ class App extends Component {
                             <Header/>
                             <Route exact path="/" render={props => (
                                 <React.Fragment>
-                                    <AddTodo addTodo={this.addTodo}/>
+                                    <AddTodo />
                                     {/*<Todos todos={this.state.todos}*/}
                                     {/*       markComplete={this.markComplete}*/}
                                     {/*       delTodo={this.delTodo}/>*/}

@@ -6,11 +6,16 @@ const initialState = {
 };
 
 export default function todoReducer(state = initialState, action) {
-    switch(action.type) {
+    switch (action.type) {
         case GET_TODOS:
             return {
                 ...state,
                 items: action.payload
+            };
+        case POST_TODO:
+            return {
+                ...state,
+                item: action.payload
             };
         default:
             return state;
