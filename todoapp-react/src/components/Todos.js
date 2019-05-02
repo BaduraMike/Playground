@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {getTodos} from '../actions/todoActions';
 
 class Todos extends Component {
-
     componentDidMount() {
         this.props.getTodos();
     }
@@ -16,9 +15,22 @@ class Todos extends Component {
         }
     }
 
+    //Toggle Complete
+    markComplete = (id) => {
+        console.log(id);
+        this.setState({
+            todos: this.props.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.completed = !todo.completed
+                }
+                return todo;
+            })
+        });
+    };
+
     render() {
         return this.props.todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} markComplete={this.props.markComplete}
+            <TodoItem key={todo.id} todo={todo} markComplete={this.markComplete}
                       delTodo={this.props.delTodo}/>
         ));
     }
@@ -29,7 +41,6 @@ Todos.propTypes = {
     getTodos: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     newTodo: PropTypes.object.isRequired,
-    // markComplete: PropTypes.func.isRequired,
     // delTodo: PropTypes.func.isRequired,
 };
 

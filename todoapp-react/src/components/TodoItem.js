@@ -16,8 +16,8 @@ class TodoItem extends Component {
         return (
             <div style={this.getStyle()}>
                 <p>
-                    {/*<input type={"checkbox"}*/}
-                    {/*       onChange={this.props.markComplete.bind(this, id)}/> {' '}*/}
+                    <input type={"checkbox"}
+                           onChange={this.props.markComplete.bind(this, id)}/>
                     {id}{'. '}
                     {title}
                     {/*<button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>x*/}
@@ -31,7 +31,7 @@ class TodoItem extends Component {
 //PropTypes
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    // markComplete: PropTypes.func.isRequired,
+    markComplete: PropTypes.func.isRequired,
     // delTodo: PropTypes.func.isRequired,
 };
 

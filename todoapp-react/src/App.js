@@ -13,18 +13,6 @@ import './App.css';
 
 class App extends Component {
 
-    //Toggle Complete
-    markComplete = (id) => {
-        this.setState({
-            todos: this.state.todos.map(todo => {
-                if (todo.id === id) {
-                    todo.completed = !todo.completed
-                }
-                return todo;
-            })
-        });
-    };
-
     //Delete Todo
     delTodo = (id) => {
         axios.delete('https://jsonplaceholder.typicode.com/todos/' + id)
@@ -44,11 +32,8 @@ class App extends Component {
                             <Header/>
                             <Route exact path="/" render={props => (
                                 <React.Fragment>
-                                    <AddTodo />
-                                    {/*<Todos todos={this.state.todos}*/}
-                                    {/*       markComplete={this.markComplete}*/}
-                                    {/*       delTodo={this.delTodo}/>*/}
-                                    <Todos />
+                                    <AddTodo/>
+                                    <Todos/>
                                 </React.Fragment>
                             )}/>
                             <Route path="/about" component={About}/>
