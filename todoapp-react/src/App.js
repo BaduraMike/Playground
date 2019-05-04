@@ -5,22 +5,12 @@ import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
 // import uuid from 'uuid';
-import axios from 'axios';
 import {Provider} from 'react-redux';
 import store from './store';
 
 import './App.css';
 
 class App extends Component {
-
-    //Delete Todo
-    delTodo = (id) => {
-        axios.delete('https://jsonplaceholder.typicode.com/todos/' + id)
-            .then(res => this.setState({
-                todos:
-                    [...this.state.todos.filter(todo => todo.id !== id)]
-            }));
-    };
 
     render() {
 

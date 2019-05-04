@@ -1,4 +1,4 @@
-import {GET_TODOS, POST_TODO} from './types';
+import {DELETE_TODO, GET_TODOS, POST_TODO} from './types';
 import axios from "axios";
 
 //ES6 SYNTAX
@@ -18,7 +18,17 @@ export const postTodo = (todo) => dispatch => {
             dispatch({
                 type: POST_TODO,
                 payload: post.data,
-            }));
+            })
+        );
+};
+
+//Delete Todo
+export const deleteTodo = (id) => dispatch => {
+    axios.delete('https://jsonplaceholder.typicode.com/todos/' + id);
+    dispatch({
+        type: DELETE_TODO,
+        payload: id,
+    });
 };
 
 // preES6 SYNTAX

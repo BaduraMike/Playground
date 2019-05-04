@@ -31,7 +31,7 @@ class Todos extends Component {
     render() {
         return this.props.todos.map((todo) => (
             <TodoItem key={todo.id} todo={todo} markComplete={this.markComplete}
-                      delTodo={this.props.delTodo}/>
+                      deleteTodo={this.props.deleteTodo}/>
         ));
     }
 }
@@ -41,7 +41,7 @@ Todos.propTypes = {
     getTodos: PropTypes.func.isRequired,
     todos: PropTypes.array.isRequired,
     newTodo: PropTypes.object.isRequired,
-    // delTodo: PropTypes.func.isRequired,
+    // deleteTodo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -1,4 +1,4 @@
-import {GET_TODOS, POST_TODO} from '../actions/types';
+import {GET_TODOS, POST_TODO, DELETE_TODO} from '../actions/types';
 
 const initialState = {
     items: [],
@@ -16,6 +16,13 @@ export default function todoReducer(state = initialState, action) {
             return {
                 ...state,
                 item: action.payload
+            };
+        case DELETE_TODO:
+            return {
+                ...state,
+                items: state.items.filter(
+                    item => item.id !== action.payload
+                )
             };
         default:
             return state;
