@@ -15,22 +15,9 @@ class Todos extends Component {
         }
     }
 
-    //Toggle Complete
-    markComplete = (id) => {
-        console.log(id);
-        this.setState({
-            todos: this.props.todos.map(todo => {
-                if (todo.id === id) {
-                    todo.completed = !todo.completed
-                }
-                return todo;
-            })
-        });
-    };
-
     render() {
         return this.props.todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} markComplete={this.markComplete}
+            <TodoItem key={todo.id} todo={todo} markComplete={this.props.onCompleteClick}
                       deleteTodo={this.props.deleteTodo}/>
         ));
     }
@@ -49,4 +36,7 @@ const mapStateToProps = state => ({
     newTodo: state.todos.item
 });
 
-export default connect(mapStateToProps, {getTodos})(Todos);
+export default connect(
+    mapStateToProps,
+    {getTodos}
+)(Todos);

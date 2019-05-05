@@ -56,4 +56,7 @@ AddTodo.propTypes = {
     postTodo: PropTypes.func.isRequired,
 };
 
-export default connect(null, {postTodo})(AddTodo);
+export default connect(
+    null,
+    {postTodo}
+    )(AddTodo);

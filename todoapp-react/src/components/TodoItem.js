@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux"
-import {deleteTodo} from "../actions/todoActions";
+import {deleteTodo, toggleTodo} from "../actions/todoActions";
 
 class TodoItem extends Component {
     getStyle = () => {
@@ -18,7 +18,7 @@ class TodoItem extends Component {
     };
 
     onCompleteClick = id => {
-        this.props.markComplete(id);
+        this.props.toggleTodo(id);
     };
 
     render() {
@@ -41,7 +41,7 @@ class TodoItem extends Component {
 //PropTypes
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    markComplete: PropTypes.func.isRequired,
+    toggleTodo: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired,
 };
 
@@ -61,5 +61,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {deleteTodo}
+    {deleteTodo, toggleTodo}
 )(TodoItem);

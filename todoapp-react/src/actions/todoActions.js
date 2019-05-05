@@ -1,4 +1,4 @@
-import {DELETE_TODO, GET_TODOS, POST_TODO} from './types';
+import {DELETE_TODO, GET_TODOS, POST_TODO, TOGGLE_TODO} from './types';
 import axios from "axios";
 
 //ES6 SYNTAX
@@ -27,6 +27,13 @@ export const deleteTodo = (id) => dispatch => {
     axios.delete('https://jsonplaceholder.typicode.com/todos/' + id);
     dispatch({
         type: DELETE_TODO,
+        payload: id,
+    });
+};
+
+export const toggleTodo = (id) => dispatch => {
+    dispatch({
+        type: TOGGLE_TODO,
         payload: id,
     });
 };

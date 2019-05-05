@@ -1,4 +1,4 @@
-import {GET_TODOS, POST_TODO, DELETE_TODO} from '../actions/types';
+import {GET_TODOS, POST_TODO, DELETE_TODO, TOGGLE_TODO} from '../actions/types';
 
 const initialState = {
     items: [],
@@ -24,6 +24,12 @@ export default function todoReducer(state = initialState, action) {
                     item => item.id !== action.payload
                 )
             };
+        case TOGGLE_TODO:
+            return {
+                ...state,
+                items: state.items.map(todo =>
+                    todo.id === action.payload ? {...todo, completed: !todo.completed} : todo
+                )};
         default:
             return state;
     }
