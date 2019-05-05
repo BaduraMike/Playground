@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux"
+import {deleteTodo, toggleTodo} from "../actions/todoActions";
 
 class TodoItem extends Component {
     getStyle = () => {
@@ -11,15 +13,24 @@ class TodoItem extends Component {
         }
     };
 
+    onDeleteClick = id => {
+        this.props.deleteTodo(id);
+    };
+
+    onCompleteClick = id => {
+        this.props.toggleTodo(id);
+    };
+
     render() {
         const {id, title} = this.props.todo;
         return (
             <div style={this.getStyle()}>
                 <p>
                     <input type={"checkbox"}
-                           onChange={this.props.markComplete.bind(this, id)}/> {' '}
+                           onChange={this.onCompleteClick.bind(this, id)}/>
+                    {id}{'. '}
                     {title}
-                    <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>x
+                    <button onClick={this.onDeleteClick.bind(this, id)} style={btnStyle}>x
                     </button>
                 </p>
             </div>
@@ -30,8 +41,8 @@ class TodoItem extends Component {
 //PropTypes
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    markComplete: PropTypes.func.isRequired,
-    delTodo: PropTypes.func.isRequired,
+    toggleTodo: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
 };
 
 const btnStyle = {
@@ -44,4 +55,11 @@ const btnStyle = {
     float: "right"
 };
 
-export default TodoItem;
+const mapStateToProps = state => ({
+    todos: state.todos.items,
+});
+
+export default connect(
+    mapStateToProps,
+    {deleteTodo, toggleTodo}
+)(TodoItem);
